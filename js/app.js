@@ -201,6 +201,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (state.activeFilter === 'alto_risco') {
                 return tick.riskLevel === 'CRÍTICO' || tick.riskLevel === 'ALTO';
             }
+            if (state.activeFilter === 'argasidae') {
+                return tick.family === 'Argasidae';
+            }
             if (state.activeFilter === 'caes') {
                 return tick.hostTypes.some(h => h.toLowerCase().includes('cão') || h.toLowerCase().includes('cães'));
             }
@@ -283,6 +286,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span style="font-size:10px; font-weight:600; padding:2px 8px; border-radius:99px; background:#E5E7EB; color:#374151;">
                             Família ${tick.family}
                         </span>
+                        <span style="font-size:10px; font-weight:600; padding:2px 8px; border-radius:99px; background:#F3EEF9; color:var(--primary-purple);">
+                            Gênero ${tick.taxonomy ? tick.taxonomy.genus : 'Ixodida'}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -290,27 +296,50 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="detail-section-title">Descrição Geral e Importância Médica</div>
             <p class="detail-text">${tick.description}</p>
 
-            <div class="detail-section-title">Doenças Transmitidas (Vetores)</div>
-            <div class="tag-list">
+            <div class="detail-section-title">Doenças Transmitidas (Vetores) e Letalidade</div>
+            <div class="tag-list" style="margin-bottom:8px;">
                 ${tick.primaryVectorOf.map(v => `<span class="tag-pill" style="background:#FEE2E2; color:#B91C1C; font-weight:600;">⚠️ ${v}</span>`).join('')}
             </div>
+            ${tick.lethality ? `<p class="detail-text" style="font-size:12px; color:#991B1B; background:#FEF2F2; padding:8px 10px; border-radius:8px; border-left:3px solid #EF4444;"><strong>Gravidade:</strong> ${tick.lethality}</p>` : ''}
 
             <div class="detail-section-title">Principais Hospedeiros</div>
             <div class="tag-list">
                 ${tick.hostTypes.map(h => `<span class="tag-pill">🐾 ${h}</span>`).join('')}
             </div>
 
-            <div class="detail-section-title">Morfologia de Reconhecimento</div>
+            <div class="detail-section-title">Morfologia e Características de Diagnose</div>
             <ul style="padding-left:18px; font-size:12px; color:#4B5563; line-height:1.5;">
-                <li><strong>Capítulo:</strong> ${tick.morphology.capitulum}</li>
+                <li><strong>Capítulo (Peças bucais):</strong> ${tick.morphology.capitulum}</li>
                 <li><strong>Escudo dorsal:</strong> ${tick.morphology.scutum}</li>
                 <li><strong>Tamanho:</strong> ${tick.morphology.size}</li>
                 <li><strong>Festões marginais:</strong> ${tick.morphology.festons}</li>
+                ${tick.morphology.hypostome ? `<li><strong>Hipostômio (Dentição):</strong> ${tick.morphology.hypostome}</li>` : ''}
             </ul>
+
+            ${tick.seasonality ? `
+            <div class="detail-section-title">Sazonalidade e Dinâmica de Campo</div>
+            <div style="background:#F9FAFB; padding:10px; border-radius:8px; font-size:12px; color:#374151;">
+                <div><strong>🐛 Larvas:</strong> ${tick.seasonality.larvae}</div>
+                <div style="margin:4px 0;"><strong>🩸 Ninfas:</strong> ${tick.seasonality.nymphs}</div>
+                <div><strong>🕷️ Adultos:</strong> ${tick.seasonality.adults}</div>
+            </div>
+            ` : ''}
+
+            ${tick.clinicalManifestations ? `
+            <div class="detail-section-title">Quadro Clínico e Sintomas da Picada</div>
+            <p class="detail-text" style="font-size:12px;">${tick.clinicalManifestations}</p>
+            ` : ''}
+
+            ${tick.treatment ? `
+            <div class="detail-section-title">Tratamento de Escolha e Conduta</div>
+            <div style="background:#ECFDF5; border-left:3px solid #10B981; padding:8px 10px; border-radius:8px; font-size:12px; color:#065F46;">
+                <strong>Conduta Farmacológica:</strong> ${tick.treatment}
+            </div>
+            ` : ''}
 
             <div class="detail-section-title">Distribuição Geográfica e Habitat</div>
             <p class="detail-text" style="font-size:12px;"><strong>Distribuição:</strong> ${tick.distribution}</p>
-            <p class="detail-text" style="font-size:12px;"><strong>Habitat:</strong> ${tick.habitat}</p>
+            <p class="detail-text" style="font-size:12px; margin-top:3px;"><strong>Habitat:</strong> ${tick.habitat}</p>
 
             <div style="margin-top:20px; display:flex; gap:8px;">
                 <button id="btnDetailReportMap" class="btn-primary-block" style="background:var(--pin-orange);">

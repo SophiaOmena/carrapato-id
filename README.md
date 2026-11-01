@@ -43,18 +43,22 @@ O aplicativo foi projetado seguindo as diretrizes de design mobile (9:16) com id
 
 ## 🔬 Banco de Dados Taxonômico Integrado
 
-O sistema inclui 8 espécies de importância médica e veterinária no Brasil, representadas por ilustrações anatômicas vetoriais (SVG) com detalhes de ornamentação dorsal:
+O sistema inclui 12 espécies de máxima importância médica e veterinária no Brasil, representadas por ilustrações anatômicas vetoriais (SVG) com detalhes de ornamentação dorsal, festões e peças bucais:
 
-| Espécie | Nome Popular | Família | Escudo | Vetor Principal | Nível de Risco |
+| Espécie | Nome Popular | Família | Escudo | Vetor Principal / Risco | Nível de Risco |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| *Amblyomma sculptum* | Carrapato-estrela | Ixodidae | Ornamentado | Febre Maculosa Brasileira | **CRÍTICO** |
-| *Rhipicephalus sanguineus* | Carrapato-vermelho-do-cão | Ixodidae | Inornado | Erliquiose e Babesiose | **ALTO** |
+| *Amblyomma sculptum* | Carrapato-estrela | Ixodidae | Ornamentado | Febre Maculosa Brasileira (*R. rickettsii*) | **CRÍTICO** |
+| *Rhipicephalus sanguineus* | Carrapato-vermelho-do-cão | Ixodidae | Inornado | Erliquiose e Babesiose canina | **ALTO** |
 | *Amblyomma aureolatum* | Carrapato-amarelo-do-cão | Ixodidae | Ornamentado | Febre Maculosa (Mata Atlântica) | **CRÍTICO** |
-| *Dermacentor nitens* | Carrapato-da-orelha-do-cavalo | Ixodidae | Inornado | Babesiose Equina | **MODERADO** |
+| *Dermacentor nitens* | Carrapato-da-orelha-do-cavalo | Ixodidae | Inornado | Babesiose Equina (7 festões fundidos) | **MODERADO** |
 | *Rhipicephalus microplus* | Carrapato-do-boi | Ixodidae | Inornado | Tristeza Parasitária Bovina | **MODERADO** |
-| *Ixodes scapularis* | Carrapato-de-pernas-pretas | Ixodidae | Inornado | Doença de Lyme | **ALTO** |
+| *Ixodes scapularis* | Carrapato-de-pernas-pretas | Ixodidae | Inornado | Doença de Lyme (*Borrelia burgdorferi*) | **ALTO** |
 | *Argas miniatus* | Carrapato-de-galinha | Argasidae | Ausente (Mole) | Espiroquetose Aviária | **MODERADO** |
-| *Amblyomma ovale* | Carrapato-ovale | Ixodidae | Ornamentado | *Rickettsia parkeri* | **ALERTA** |
+| *Amblyomma ovale* | Carrapato-ovale | Ixodidae | Ornamentado | *Rickettsia parkeri* (Mata Atlântica) | **ALERTA** |
+| *Ornithodoros brasiliensis* | Carrapato-mouro | Argasidae | Ausente (Mole) | Toxina salivar necrótica e Febre Recorrente (RS/SC) | **CRÍTICO** |
+| *Amblyomma triste* | Carrapato-triste | Ixodidae | Ornamentado | *Rickettsia parkeri* (Pampa e Pantanal) | **ALERTA** |
+| *Ornithodoros rostratus* | Carrapato-do-chão | Argasidae | Ausente (Mole) | Choque tóxico tecidual em solo arenoso do Pantanal | **ALTO** |
+| *Amblyomma brasiliense* | Carrapato-brasiliense | Ixodidae | Ornamentado | Riquetsioses associadas a queixadas e matas | **ALERTA** |
 
 ---
 

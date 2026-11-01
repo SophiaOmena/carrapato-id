@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <!-- Ornithodoros brasiliensis - Carrapato Mouro (Argasidae, corpo mole rugoso, peças bucais ocultas) -->
+  <defs>
+    <radialGradient id="mouroGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#78593A"/>
+      <stop offset="65%" stop-color="#4E331B"/>
+      <stop offset="100%" stop-color="#2D190B"/>
+    </radialGradient>
+    <filter id="mouroDrop" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Pernas curtas articuladas sob o corpo -->
+  <g stroke="#3D2614" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M60 70 L30 50 L18 60"/>
+    <path d="M140 70 L170 50 L182 60"/>
+    <path d="M55 95 L25 90 L12 105"/>
+    <path d="M145 95 L175 90 L188 105"/>
+    <path d="M58 120 L28 128 L20 145"/>
+    <path d="M142 120 L172 128 L180 145"/>
+    <path d="M65 145 L38 165 L32 185"/>
+    <path d="M135 145 L162 165 L168 185"/>
+  </g>
+
+  <!-- Corpo mole, coriáceo, oval alargado com margens mamelonadas -->
+  <path d="M100 35 C55 35, 45 75, 45 115 C45 160, 65 178, 100 178 C135 178, 155 160, 155 115 C155 75, 145 35, 100 35 Z"
+        fill="url(#mouroGrad)" filter="url(#mouroDrop)"/>
+
+  <!-- Rugosidades, sulcos e mamelões típicos de Argasidae -->
+  <g fill="none" stroke="#251408" stroke-width="1.8" opacity="0.6">
+    <path d="M70 65 Q100 60 130 65"/>
+    <path d="M65 85 Q100 78 135 85"/>
+    <path d="M60 105 Q100 98 140 105"/>
+    <path d="M60 125 Q100 118 140 125"/>
+    <path d="M65 145 Q100 140 135 145"/>
+    <path d="M75 160 Q100 155 125 160"/>
+    <circle cx="85" cy="90" r="3" fill="#251408"/>
+    <circle cx="115" cy="90" r="3" fill="#251408"/>
+    <circle cx="80" cy="115" r="3.5" fill="#251408"/>
+    <circle cx="120" cy="115" r="3.5" fill="#251408"/>
+    <circle cx="100" cy="135" r="4" fill="#251408"/>
+  </g>
+
+  <!-- Borda posterior arredondada contínua (sem festões quitinosos) -->
+  <ellipse cx="100" cy="172" rx="35" ry="3" fill="#1E0E04" opacity="0.4"/>
+</svg>

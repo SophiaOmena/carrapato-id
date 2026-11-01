@@ -6,22 +6,25 @@ const path = require('node:path');
 const { TICKS_DATABASE } = require('../js/database.js');
 
 test('Banco de Dados de Carrapatos - Validação de Integridade e Estrutura', async (t) => {
-    await t.test('deve conter exatamente 8 espécies catalogadas', () => {
+    await t.test('deve conter exatamente 12 espécies catalogadas no acervo ampliado', () => {
         assert.ok(Array.isArray(TICKS_DATABASE));
-        assert.strictEqual(TICKS_DATABASE.length, 8);
+        assert.strictEqual(TICKS_DATABASE.length, 12);
     });
 
-    await t.test('todas as espécies devem possuir campos obrigatórios preenchidos', () => {
+    await t.test('todas as espécies devem possuir campos taxonômicos e epidemiológicos aprofundados', () => {
         const requiredFields = [
             'id',
             'scientificName',
             'commonName',
             'family',
+            'taxonomy',
             'riskLevel',
             'riskColor',
             'morphology',
             'hostTypes',
             'primaryVectorOf',
+            'lethality',
+            'treatment',
             'distribution',
             'habitat',
             'description',
@@ -36,6 +39,7 @@ test('Banco de Dados de Carrapatos - Validação de Integridade e Estrutura', as
             assert.ok(typeof tick.morphology === 'object');
             assert.ok(tick.morphology.capitulum, `Capítulo ausente em ${tick.scientificName}`);
             assert.ok(tick.morphology.scutum, `Escudo ausente em ${tick.scientificName}`);
+            assert.ok(tick.taxonomy.genus, `Gênero taxonômico ausente em ${tick.scientificName}`);
         });
     });
 
@@ -49,18 +53,20 @@ test('Banco de Dados de Carrapatos - Validação de Integridade e Estrutura', as
         });
     });
 
-    await t.test('deve conter as espécies de maior relevância em saúde pública (FMB)', () => {
+    await t.test('deve conter as espécies de maior relevância em saúde pública e carrapatos moles', () => {
         const sculptum = TICKS_DATABASE.find(t => t.id === 'amblyomma_sculptum');
         assert.ok(sculptum, 'Amblyomma sculptum deve estar presente');
         assert.strictEqual(sculptum.riskLevel, 'CRÍTICO');
         assert.ok(sculptum.primaryVectorOf.some(v => v.includes('Febre Maculosa')));
 
-        const aureolatum = TICKS_DATABASE.find(t => t.id === 'amblyomma_aureolatum');
-        assert.ok(aureolatum, 'Amblyomma aureolatum deve estar presente');
-        assert.strictEqual(aureolatum.riskLevel, 'CRÍTICO');
+        const mouro = TICKS_DATABASE.find(t => t.id === 'ornithodoros_brasiliensis');
+        assert.ok(mouro, 'Ornithodoros brasiliensis (Carrapato-mouro) deve estar presente');
+        assert.strictEqual(mouro.family, 'Argasidae');
 
-        const sanguineus = TICKS_DATABASE.find(t => t.id === 'rhipicephalus_sanguineus');
-        assert.ok(sanguineus, 'Rhipicephalus sanguineus deve estar presente');
-        assert.ok(sanguineus.hostTypes.includes('Cães domésticos'));
+        const pantanal = TICKS_DATABASE.find(t => t.id === 'ornithodoros_rostratus');
+        assert.ok(pantanal, 'Ornithodoros rostratus deve estar presente');
+
+        const triste = TICKS_DATABASE.find(t => t.id === 'amblyomma_triste');
+        assert.ok(triste, 'Amblyomma triste deve estar presente');
     });
 });

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <!-- Ornithodoros rostratus - Carrapato-do-chão do Pantanal (Argasidae, corpo achatado, rugoso, cinza-areia) -->
+  <defs>
+    <radialGradient id="rostratusGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8C7863"/>
+      <stop offset="65%" stop-color="#5E4E3C"/>
+      <stop offset="100%" stop-color="#382C1E"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Pernas espessas adaptadas ao solo arenoso -->
+  <g stroke="#3A2C1C" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M62 65 L28 45 L15 58"/>
+    <path d="M138 65 L172 45 L185 58"/>
+    <path d="M56 92 L22 88 L10 102"/>
+    <path d="M144 92 L178 88 L190 102"/>
+    <path d="M58 122 L24 125 L16 142"/>
+    <path d="M142 122 L176 125 L184 142"/>
+    <path d="M66 148 L35 168 L28 188"/>
+    <path d="M134 148 L165 168 L172 188"/>
+  </g>
+
+  <!-- Idiosoma oval estreito anteriormente (rostrado) -->
+  <path d="M100 30 C65 30, 48 70, 48 115 C48 162, 68 182, 100 182 C132 182, 152 162, 152 115 C152 70, 135 30, 100 30 Z"
+        fill="url(#rostratusGrad)"/>
+
+  <!-- Projeção anterior cônica (câmera rostral) -->
+  <path d="M92 34 L100 24 L108 34 Z" fill="#4B3B2B"/>
+
+  <!-- Tubérculos e fossetas tegumentares características de O. rostratus -->
+  <g fill="#2B1E12" opacity="0.6">
+    <circle cx="82" cy="65" r="4"/>
+    <circle cx="118" cy="65" r="4"/>
+    <circle cx="100" cy="55" r="3.5"/>
+    <circle cx="70" cy="90" r="4"/>
+    <circle cx="90" cy="85" r="4.5"/>
+    <circle cx="110" cy="85" r="4.5"/>
+    <circle cx="130" cy="90" r="4"/>
+    <circle cx="75" cy="115" r="5"/>
+    <circle cx="100" cy="110" r="5"/>
+    <circle cx="125" cy="115" r="5"/>
+    <circle cx="80" cy="140" r="4.5"/>
+    <circle cx="100" cy="138" r="5"/>
+    <circle cx="120" cy="140" r="4.5"/>
+    <circle cx="90" cy="162" r="3.5"/>
+    <circle cx="110" cy="162" r="3.5"/>
+  </g>
+</svg>

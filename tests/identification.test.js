@@ -34,9 +34,16 @@ test('Chave Dicotômica - Validação de Rotas e Consistência Taxonômica', asy
 
     await t.test('deve navegar corretamente na rota de Argasidae (carrapato mole sem escudo)', () => {
         const step1 = IDENTIFICATION_STEPS['step_1'];
-        const softOption = step1.options.find(opt => opt.text.toLowerCase().includes('mole') || opt.text.toLowerCase().includes('agasidae'));
+        const softOption = step1.options.find(opt => opt.text.toLowerCase().includes('mole') || opt.text.toLowerCase().includes('argasidae'));
         assert.ok(softOption, 'Deve haver opção para corpo mole/sem escudo dorsal');
-        assert.strictEqual(softOption.resultSpecies, 'argas_miniatus');
+        assert.strictEqual(softOption.nextStep, 'step_argasidae');
+
+        const stepArgas = IDENTIFICATION_STEPS['step_argasidae'];
+        const galinhaOpt = stepArgas.options.find(opt => opt.resultSpecies === 'argas_miniatus');
+        assert.ok(galinhaOpt, 'Opção para Argas miniatus deve existir');
+
+        const mouroOpt = stepArgas.options.find(opt => opt.resultSpecies === 'ornithodoros_brasiliensis');
+        assert.ok(mouroOpt, 'Opção para Ornithodoros brasiliensis deve existir');
     });
 
     await t.test('deve navegar até Amblyomma sculptum pelo caminho morfológico correto', () => {

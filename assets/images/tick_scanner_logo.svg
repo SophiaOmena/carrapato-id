@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <!-- Cantoneiras de Scanner [ ] -->
+  <path d="M 35 65 L 35 35 L 65 35" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" fill="none" />
+  <path d="M 165 65 L 165 35 L 135 35" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" fill="none" />
+  <path d="M 35 135 L 35 165 L 65 165" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" fill="none" />
+  <path d="M 165 135 L 165 165 L 135 165" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" fill="none" />
+  
+  <!-- Carrapato em linha estilizada (Wireframe branco) -->
+  <g stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Pernas articuladas com nós/segmentos -->
+    <path d="M 75 75 Q 50 60 40 45 Q 35 55 30 65" />
+    <path d="M 70 95 Q 45 88 38 82 Q 32 92 30 102" />
+    <path d="M 70 115 Q 45 125 38 138 Q 32 148 35 160" />
+    <path d="M 75 135 Q 55 155 48 175 Q 45 185 50 190" />
+    <path d="M 125 75 Q 150 60 160 45 Q 165 55 170 65" />
+    <path d="M 130 95 Q 155 88 162 82 Q 168 92 170 102" />
+    <path d="M 130 115 Q 155 125 162 138 Q 168 148 165 160" />
+    <path d="M 125 135 Q 145 155 152 175 Q 155 185 150 190" />
+    <!-- Corpo e Escudo -->
+    <ellipse cx="100" cy="115" rx="35" ry="42" />
+    <path d="M 80 85 Q 100 70 120 85 Q 120 115 100 120 Q 80 115 80 85 Z" />
+    <!-- Peças bucais -->
+    <polygon points="95,72 105,72 103,50 97,50" />
+    <path d="M 90 73 C 89 60, 92 52, 95 48" />
+    <path d="M 110 73 C 111 60, 108 52, 105 48" />
+  </g>
+</svg>

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" width="100%" height="100%">
+  <defs>
+    <radialGradient id="grad-body" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#633112" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#1A0C08" />
+    </radialGradient>
+    <filter id="drop-shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-opacity="0.4" />
+    </filter>
+  </defs>
+
+  <!-- Pernas articuladas (8 pernas) -->
+  <g stroke="#3D1A06" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#drop-shadow)">
+    <!-- Lado Esquerdo -->
+    <path d="M 65 75 Q 30 50 20 25 Q 15 35 10 40" />
+    <path d="M 60 95 Q 25 80 15 70 Q 10 80 8 90" />
+    <path d="M 60 115 Q 25 125 15 140 Q 10 150 12 165" />
+    <path d="M 65 135 Q 35 160 25 190 Q 20 200 25 210" />
+
+    <!-- Lado Direito -->
+    <path d="M 135 75 Q 170 50 180 25 Q 185 35 190 40" />
+    <path d="M 140 95 Q 175 80 185 70 Q 190 80 192 90" />
+    <path d="M 140 115 Q 175 125 185 140 Q 190 150 188 165" />
+    <path d="M 135 135 Q 165 160 175 190 Q 180 200 175 210" />
+  </g>
+
+  <!-- Capítulo e Peças Bucais (Palpos e Hipostômio) -->
+  <g fill="#3A1E14" stroke="#1F0E08" stroke-width="1.5">
+    
+    <polygon points="92,40 108,40 105,10 95,10" fill="#2B140B" />
+    <path d="M 88 42 C 86 25, 90 12, 94 8 L 96 15 C 92 25, 92 35, 92 42 Z" fill="#422114" />
+    <path d="M 112 42 C 114 25, 110 12, 106 8 L 104 15 C 108 25, 108 35, 108 42 Z" fill="#422114" />
+    <polygon points="97,12 103,12 102,5 98,5" fill="#D97706" />
+    
+  </g>
+
+  <!-- Corpo do Carrapato (Idiosoma) -->
+  <g filter="url(#drop-shadow)">
+    <ellipse cx="100" cy="130" rx="55" ry="65" fill="url(#grad-body)" stroke="#261008" stroke-width="2" />
+  </g>
+
+  <!-- Festões na margem posterior -->
+  <g stroke="#261008" stroke-width="1.5" fill="none" opacity="0.7">
+    <path d="M 55 170 Q 60 190 70 193" />
+    <path d="M 70 193 Q 80 195 85 195" />
+    <path d="M 85 195 Q 100 196 115 195" />
+    <path d="M 115 195 Q 125 194 130 193" />
+    <path d="M 130 193 Q 140 190 145 170" />
+  </g>
+
+  <!-- Escudo Dorsal Anterior -->
+  <path d="M 65 65 Q 100 48 135 65 Q 138 105 100 115 Q 62 105 65 65 Z"
+        fill="#3D1A06" stroke="#1F0E08" stroke-width="1.5" />
+
+  <!-- Ornamentações e detalhes diagnósticos -->
+  
+  <ellipse cx="100" cy="82" rx="14" ry="9" fill="none" stroke="#EA580C" stroke-width="1.8" opacity="0.8" />
+  <circle cx="100" cy="82" r="3.5" fill="#FDE047" opacity="0.9" />
+
+
+  <!-- Olhos dorsais (quando presentes) -->
+  <circle cx="68" cy="75" r="2.5" fill="#FDE68A" stroke="#78350F" stroke-width="0.8" />
+  <circle cx="132" cy="75" r="2.5" fill="#FDE68A" stroke="#78350F" stroke-width="0.8" />
+</svg>

@@ -1,0 +1,21 @@
+{
+  "name": "carrapato-id",
+  "version": "1.0.0",
+  "description": "Aplicativo móvel e web para identificação de espécies de carrapatos, catálogo científico, chave dicotômica, mapa de ocorrências e vigilância epidemiológica.",
+  "scripts": {
+    "test": "node --test tests/**/*.test.js",
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "carrapatos",
+    "identificacao",
+    "biologia",
+    "parasitologia",
+    "febre-maculosa",
+    "saude-unica",
+    "epidemiologia",
+    "veterinaria"
+  ],
+  "author": "Anna Sophia",
+  "license": "MIT"
+}

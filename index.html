@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Carrapato ID - Identificação e Notificação de Carrapatos</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Leaflet Map CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="app-container">
+
+        <!-- ================================================================
+             1. SPLASH SCREEN (Página 1 do Protótipo)
+             ================================================================ -->
+        <div id="splashScreen" class="splash-screen">
+            <div class="splash-logo-box">
+                <div class="reticle-corner top-left"></div>
+                <div class="reticle-corner top-right"></div>
+                <div class="reticle-corner bottom-left"></div>
+                <div class="reticle-corner bottom-right"></div>
+                <img src="assets/images/tick_scanner_logo.svg" alt="Carrapato ID Logo" class="splash-icon">
+            </div>
+            <h1 class="splash-title">CARRAPATO ID</h1>
+            <p class="splash-subtitle">Identificação • Notificação • Vigilância</p>
+            <button id="btnEnterApp" class="btn-splash-start">Começar Agora</button>
+        </div>
+
+        <!-- ================================================================
+             BARRA SUPERIOR (HEADER)
+             ================================================================ -->
+        <header class="app-header">
+            <div class="app-header-left">
+                <div class="app-logo-badge">
+                    <img src="assets/images/tick_scanner_logo.svg" alt="Ícone">
+                </div>
+                <div class="app-title">Carrapato ID</div>
+            </div>
+            <button class="header-action-btn" id="btnHeaderInfo" title="Sobre o Projeto">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+            </button>
+        </header>
+
+        <!-- ================================================================
+             CONTEÚDO PRINCIPAL (ÁREA DE VIEWS)
+             ================================================================ -->
+        <main class="app-content">
+
+            <!-- ------------------------------------------------------------
+                 VIEW: INÍCIO (Home - Páginas 2, 3 e 4)
+                 ------------------------------------------------------------ -->
+            <section id="viewHome" class="view-section active">
+                
+                <!-- Card Hero de Tutorial de Notificação -->
+                <div class="hero-tutorial-card" id="cardHeroTutorial">
+                    <span class="tutorial-tag">Guia Oficial</span>
+                    <h2 class="tutorial-title">TUTORIAL DE COMO NOTIFICAR A PRESENÇA DE CARRAPATOS</h2>
+                    <div class="tutorial-hint">
+                        <span>Toque para ver o passo a passo</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Linha de 3 Círculos de Ação Rápida -->
+                <div class="action-circles-grid">
+                    <button class="action-circle-item" id="btnActionPicada">
+                        <div class="circle-icon-wrapper tan">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                            </svg>
+                        </div>
+                        <span class="circle-label">Picada do<br>carrapato</span>
+                    </button>
+
+                    <button class="action-circle-item" id="btnActionDoencas">
+                        <div class="circle-icon-wrapper mauve">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M4.5 10.5C3.67 10.5 3 11.17 3 12s.67 1.5 1.5 1.5h15c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5h-15zM12 4.5c-.83 0-1.5.67-1.5 1.5v12c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V6c0-.83-.67-1.5-1.5-1.5z"/>
+                            </svg>
+                        </div>
+                        <span class="circle-label">Doenças<br>transmitidas</span>
+                    </button>
+
+                    <button class="action-circle-item" id="btnActionCuidados">
+                        <div class="circle-icon-wrapper cyan">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+                            </svg>
+                        </div>
+                        <span class="circle-label">Cuidados e<br>prevenção</span>
+                    </button>
+                </div>
+
+                <!-- Carrossel de Módulos (Páginas 2, 3 e 4) -->
+                <div class="carousel-section">
+                    <div class="carousel-section-title">Acesso Rápido aos Recursos</div>
+                    <div class="cards-carousel" id="cardsCarousel">
+                        
+                        <!-- Card 1: Chave de Identificação -->
+                        <div class="feature-card purple" id="cardChaveIdentificacao">
+                            <div>
+                                <div class="card-top-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="card-title">Chave de identificação</h3>
+                                <p class="card-desc">Identifique a espécie passo a passo através de perguntas morfológicas simples.</p>
+                            </div>
+                            <div class="card-arrow">
+                                <span>Iniciar diagnóstico</span>
+                                <span>&rarr;</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Catálogo -->
+                        <div class="feature-card green" id="cardCatalogoHome">
+                            <div>
+                                <div class="card-top-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="card-title">Catálogo</h3>
+                                <p class="card-desc">Consulte a lista completa de espécies de carrapatos do Brasil, fotos e riscos.</p>
+                            </div>
+                            <div class="card-arrow">
+                                <span>Abrir catálogo</span>
+                                <span>&rarr;</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Medidas de Controle Alternativo -->
+                        <div class="feature-card green" id="cardControleAlternativo">
+                            <div>
+                                <div class="card-top-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66l.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="card-title">Medidas de controle alternativo</h3>
+                                <p class="card-desc">Manejo sustentável de pastagens, fitoterapia, predadores naturais e controle biológico.</p>
+                            </div>
+                            <div class="card-arrow">
+                                <span>Saiba mais</span>
+                                <span>&rarr;</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Indicadores de Pontos do Carrossel -->
+                    <div class="carousel-dots" id="carouselDots">
+                        <div class="carousel-dot active"></div>
+                        <div class="carousel-dot"></div>
+                        <div class="carousel-dot"></div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ------------------------------------------------------------
+                 VIEW: CATÁLOGO DE ESPÉCIES (Página 8)
+                 ------------------------------------------------------------ -->
+            <section id="viewCatalog" class="view-section">
+                <div class="catalog-header">
+                    <button class="back-btn" id="btnBackFromCatalog">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <h2 class="catalog-header-title">Catálogo</h2>
+                </div>
+
+                <!-- Campo de Pesquisa -->
+                <div class="catalog-search-box">
+                    <span class="catalog-search-icon">🔍</span>
+                    <input type="text" id="catalogSearchInput" class="catalog-search-input" placeholder="Buscar por espécie, hospedeiro ou doença...">
+                </div>
+
+                <!-- Filtros em Pílula -->
+                <div class="catalog-filters" id="catalogFilterPills">
+                    <button class="filter-pill active" data-filter="all">Todos</button>
+                    <button class="filter-pill" data-filter="maculosa">Febre Maculosa</button>
+                    <button class="filter-pill" data-filter="alto_risco">Alto Risco</button>
+                    <button class="filter-pill" data-filter="caes">Cães</button>
+                    <button class="filter-pill" data-filter="equinos">Cavalos</button>
+                    <button class="filter-pill" data-filter="capivaras">Capivaras</button>
+                </div>
+
+                <!-- Grid de Cards de Carrapato (Página 8) -->
+                <div class="ticks-grid" id="ticksGrid">
+                    <!-- Gerado dinamicamente via JS a partir de TICKS_DATABASE -->
+                </div>
+            </section>
+
+            <!-- ------------------------------------------------------------
+                 VIEW: SCANNER / CÂMERA (Página 7)
+                 ------------------------------------------------------------ -->
+            <section id="viewScanner" class="view-section">
+                <div class="scanner-viewport">
+                    <!-- Overlay de foco -->
+                    <div class="scanner-overlay"></div>
+
+                    <!-- Vídeo de câmera real ou preview -->
+                    <video id="scannerVideo" class="scanner-video-preview" autoplay playsinline muted></video>
+                    <img id="scannerImagePreview" class="scanner-image-preview" style="display:none;" alt="Preview">
+
+                    <!-- Retículo de mira de identificação -->
+                    <div class="scanner-reticle-box">
+                        <div class="reticle-corner top-left"></div>
+                        <div class="reticle-corner top-right"></div>
+                        <div class="reticle-corner bottom-left"></div>
+                        <div class="reticle-corner bottom-right"></div>
+                        <div class="scanner-reticle-line"></div>
+                    </div>
+
+                    <!-- Instrução Superior -->
+                    <div class="scanner-top-instructions">
+                        Centralize o carrapato na mira para identificação
+                    </div>
+
+                    <!-- Controles Inferiores da Câmera -->
+                    <div class="scanner-controls-bottom">
+                        <!-- Botão de Upload de Foto -->
+                        <label for="scannerFileInput" class="scanner-action-icon-btn" title="Carregar foto da galeria">
+                            📁
+                        </label>
+                        <input type="file" id="scannerFileInput" accept="image/*" style="display:none;">
+
+                        <!-- Botão Central de Disparo (Roxo com borda branca) -->
+                        <button id="btnCapturePhoto" class="scanner-shutter-btn" title="Capturar e Identificar">
+                            <div class="scanner-shutter-inner"></div>
+                        </button>
+
+                        <!-- Botão de Alternar Câmera / Modo Teste -->
+                        <button id="btnToggleCamera" class="scanner-action-icon-btn" title="Testar com espécime de exemplo">
+                            🔬
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card de Diagnóstico do Scanner -->
+                <div id="scanResultCard" class="scan-result-card">
+                    <div class="scan-result-header">
+                        <div>
+                            <span class="confidence-badge" id="scanConfidence">Confiança: 96%</span>
+                            <h3 class="scan-result-title" id="scanResultSpecies">Amblyomma sculptum</h3>
+                            <p style="font-size:12px; color:#6B7280;" id="scanResultCommon">Carrapato-estrela</p>
+                        </div>
+                        <span id="scanRiskBadge" style="font-size:10px; font-weight:800; padding:3px 8px; border-radius:99px; background:#FEE2E2; color:#B91C1C;">CRÍTICO</span>
+                    </div>
+                    <p id="scanDiagnosticSummary" style="font-size:12px; color:#374151; margin:8px 0; line-height:1.4;">
+                        Capítulo longo, escudo ricamente ornamentado. Principal vetor da Febre Maculosa Brasileira.
+                    </p>
+                    <div style="display:flex; gap:8px; margin-top:12px;">
+                        <button id="btnScanOpenDetail" class="btn-primary-block" style="padding:10px; font-size:13px; background:#7C619A;">Ver Ficha Completa</button>
+                        <button id="btnScanReportMap" class="btn-primary-block" style="padding:10px; font-size:13px; background:#E75A2D;">Notificar no Mapa</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ------------------------------------------------------------
+                 VIEW: MAPA DE OCORRÊNCIAS (Página 6)
+                 ------------------------------------------------------------ -->
+            <section id="viewMap" class="view-section">
+                <div class="map-view-header">
+                    <h2 class="map-view-title">Mapa de Ocorrências</h2>
+                    <button class="btn-floating-report" id="btnOpenNewReportModal">
+                        <span>+</span>
+                        <span>Notificar Foco</span>
+                    </button>
+                </div>
+
+                <div class="map-container-box">
+                    <div id="map"></div>
+                </div>
+
+                <div class="map-pins-list-title">Últimas Ocorrências Registradas</div>
+                <div class="notifications-list" id="notificationsList">
+                    <!-- Gerado dinamicamente via JS a partir de INITIAL_NOTIFICATIONS -->
+                </div>
+            </section>
+
+            <!-- ------------------------------------------------------------
+                 VIEW: PERFIL (Página 5)
+                 ------------------------------------------------------------ -->
+            <section id="viewProfile" class="view-section">
+                <div class="profile-card">
+                    <div class="profile-avatar-circle">
+                        AS
+                    </div>
+                    <div>
+                        <h2 class="profile-name">Anna Sophia</h2>
+                        <span class="profile-role">Bióloga & Pesquisadora</span>
+                    </div>
+                </div>
+
+                <!-- Estatísticas do Usuário -->
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-number" id="profileReportCount">4</div>
+                        <div class="stat-label">Ocorrências</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">Espécies Cat.</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" style="color:#059669;">Ativo</div>
+                        <div class="stat-label">Vigilância</div>
+                    </div>
+                </div>
+
+                <!-- Menus de Configuração e Apoio -->
+                <div class="profile-menu-list">
+                    <div class="profile-menu-item" id="menuItemMyReports">
+                        <div class="menu-item-left">
+                            <div class="menu-icon-box">📍</div>
+                            <span>Minhas Notificações de Campo</span>
+                        </div>
+                        <span>&rsaquo;</span>
+                    </div>
+
+                    <div class="profile-menu-item" id="menuItemFirstAid">
+                        <div class="menu-item-left">
+                            <div class="menu-icon-box">🩹</div>
+                            <span>Guia de Primeiros Socorros</span>
+                        </div>
+                        <span>&rsaquo;</span>
+                    </div>
+
+                    <div class="profile-menu-item" id="menuItemAlertSettings">
+                        <div class="menu-item-left">
+                            <div class="menu-icon-box">🔔</div>
+                            <span>Alertas de Febre Maculosa (SP/BR)</span>
+                        </div>
+                        <span>&rsaquo;</span>
+                    </div>
+
+                    <div class="profile-menu-item" id="menuItemAbout">
+                        <div class="menu-item-left">
+                            <div class="menu-icon-box">ℹ️</div>
+                            <span>Sobre o Projeto Carrapato ID</span>
+                        </div>
+                        <span>&rsaquo;</span>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- ================================================================
+             BARRA DE NAVEGAÇÃO INFERIOR (BOTTOM NAV)
+             ================================================================ -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-tab="home" id="tabHome">
+                <div class="nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                </div>
+                <span>Início</span>
+            </button>
+
+            <button class="nav-item" data-tab="scanner" id="tabScanner">
+                <div class="nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 4h3V2H4c-1.1 0-2 .9-2 2v3h2V4zm0 16H2v-3H0v3c0 1.1.9 2 2 2h3v-2H4zm16 0h-3v2h3c1.1 0 2-.9 2-2v-3h-2v3zm0-16h-3V2h3c1.1 0 2 .9 2 2v3h-2V4zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                    </svg>
+                </div>
+                <span>Scanner</span>
+            </button>
+
+            <button class="nav-item" data-tab="map" id="tabMap">
+                <div class="nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                </div>
+                <span>Mapa</span>
+            </button>
+
+            <button class="nav-item" data-tab="profile" id="tabProfile">
+                <div class="nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
+                <span>Perfil</span>
+            </button>
+        </nav>
+
+        <!-- ================================================================
+             MODAIS DE CONTEÚDO E FORMULÁRIOS
+             ================================================================ -->
+
+        <!-- MODAL: TUTORIAL DE COMO NOTIFICAR A PRESENÇA DE CARRAPATOS -->
+        <div id="modalTutorial" class="modal-overlay">
+            <div class="modal-sheet">
+                <div class="modal-drag-bar"></div>
+                <div class="modal-header">
+                    <h3 class="modal-title">Como Notificar Carrapatos</h3>
+                    <button class="modal-close-btn">&times;</button>
+                </div>
+                <div style="font-size:13px; line-height:1.6; color:#374151;">
+                    <div style="display:flex; gap:12px; margin-bottom:14px;">
+                        <span style="font-weight:800; color:var(--primary-purple); font-size:18px;">1.</span>
+                        <div>
+                            <strong>Fotografe o espécime com boa nitidez:</strong>
+                            <p style="color:#6B7280; font-size:12px;">Se possível, utilize uma régua ou moeda para referência de tamanho e foque na parte dorsal (escudo).</p>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:12px; margin-bottom:14px;">
+                        <span style="font-weight:800; color:var(--primary-purple); font-size:18px;">2.</span>
+                        <div>
+                            <strong>Identifique os hospedeiros ou ambiente:</strong>
+                            <p style="color:#6B7280; font-size:12px;">Anote se o carrapato foi encontrado em humanos, capivaras, cães, cavalos ou na vegetação.</p>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:12px; margin-bottom:14px;">
+                        <span style="font-weight:800; color:var(--primary-purple); font-size:18px;">3.</span>
+                        <div>
+                            <strong>Use a Chave Dicotômica ou o Scanner:</strong>
+                            <p style="color:#6B7280; font-size:12px;">Descubra se o escudo possui ornamentação e verifique se há suspeita de Febre Maculosa.</p>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:12px; margin-bottom:18px;">
+                        <span style="font-weight:800; color:var(--primary-purple); font-size:18px;">4.</span>
+                        <div>
+                            <strong>Cadastre o ponto no Mapa Colaborativo:</strong>
+                            <p style="color:#6B7280; font-size:12px;">Ajude a manter as autoridades e a comunidade cientes dos focos ativos na sua região.</p>
+                        </div>
+                    </div>
+                    <button id="btnTutorialGoToMap" class="btn-primary-block">Ir para o Mapa de Ocorrências</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL: PICADA DO CARRAPATO -->
+        <div id="modalPicada" class="modal-overlay">
+            <div class="modal-sheet">
+                <div class="modal-drag-bar"></div>
+                <div class="modal-header">
+                    <h3 class="modal-title">Picada do Carrapato: O Que Fazer?</h3>
+                    <button class="modal-close-btn">&times;</button>
+                </div>
+                <div style="font-size:13px; line-height:1.6; color:#374151;">
+                    <div style="background:#FEF3C7; border-left:4px solid #F59E0B; padding:12px; border-radius:8px; margin-bottom:14px;">
+                        <strong>Importante:</strong> Quanto mais rápido você remover o carrapato, menor o risco de transmissão de bactérias como a <em>Rickettsia rickettsii</em>.
+                    </div>
+                    <h4 style="font-size:14px; color:var(--primary-purple); margin-bottom:6px;">Procedimento Correto de Remoção:</h4>
+                    <ul style="padding-left:18px; margin-bottom:14px; font-size:12px; color:#4B5563;">
+                        <li>Use uma pinça comum de ponta fina.</li>
+                        <li>Pegue o carrapato o mais próximo possível da superfície da pele.</li>
+                        <li>Puxe para cima com movimento constante e suave (NUNCA torça ou esmague).</li>
+                        <li>Após remover, lave bem o local com água, sabão e álcool 70%.</li>
+                        <li>Guarde o carrapato em um frasco com álcool para identificação laboratorial, se necessário.</li>
+                    </ul>
+                    <h4 style="font-size:14px; color:#B91C1C; margin-bottom:6px;">O que NUNCA fazer:</h4>
+                    <ul style="padding-left:18px; margin-bottom:16px; font-size:12px; color:#4B5563;">
+                        <li>Não queime o carrapato com fósforo ou cigarro.</li>
+                        <li>Não use vaselina, óleo, álcool ou esmalte antes da remoção (isso faz o carrapato regurgitar a saliva contaminada).</li>
+                        <li>Não esmague o carrapato com as unhas.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL: DOENÇAS TRANSMITIDAS -->
+        <div id="modalDoencas" class="modal-overlay">
+            <div class="modal-sheet">
+                <div class="modal-drag-bar"></div>
+                <div class="modal-header">
+                    <h3 class="modal-title">Doenças Transmitidas por Carrapatos</h3>
+                    <button class="modal-close-btn">&times;</button>
+                </div>
+                <div style="font-size:13px; line-height:1.6; color:#374151;">
+                    <div style="margin-bottom:14px;">
+                        <h4 style="color:#B91C1C; font-size:14px; margin-bottom:4px;">1. Febre Maculosa Brasileira (FMB)</h4>
+                        <p style="font-size:12px; color:#4B5563;">Causada pela bactéria <em>Rickettsia rickettsii</em>, transmitida principalmente pelo <em>Amblyomma sculptum</em> (carrapato-estrela). Apresenta alta letalidade se o tratamento com doxiciclina não for iniciado nos primeiros dias. Sintomas: febre alta súbita, dor de cabeça intensa, dores musculares e manchas avermelhadas (exantemas) nas palmas e solas.</p>
+                    </div>
+                    <div style="margin-bottom:14px;">
+                        <h4 style="color:var(--primary-purple); font-size:14px; margin-bottom:4px;">2. Doença de Lyme-símile (Borreliose / Síndrome Baggio-Yoshinari)</h4>
+                        <p style="font-size:12px; color:#4B5563;">No Brasil, transmitida por carrapatos do gênero <em>Amblyomma</em>. Sintomas incluem lesão de pele em forma de alvo (eritema migratório), dores articulares e cansaço crônico.</p>
+                    </div>
+                    <div style="margin-bottom:14px;">
+                        <h4 style="color:#D97706; font-size:14px; margin-bottom:4px;">3. Erliquiose e Babesiose</h4>
+                        <p style="font-size:12px; color:#4B5563;">Altamente frequentes em cães e transmitidas pelo carrapato-vermelho-do-cão (<em>Rhipicephalus sanguineus</em>), podendo raramente acometer seres humanos imunodeprimidos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL: CUIDADOS E PREVENÇÃO -->
+        <div id="modalCuidados" class="modal-overlay">
+            <div class="modal-sheet">
+                <div class="modal-drag-bar"></div>
+                <div class="modal-header">
+                    <h3 class="modal-title">Cuidados e Prevenção</h3>
+                    <button class="modal-close-btn">&times;</button>
+                </div>
+                <div style="font-size:13px; line-height:1.6; color:#374151;">
+                    <h4 style="color:var(--primary-purple); font-size:14px; margin-bottom:6px;">Em Trilhas, Parques e Áreas de Risco:</h4>
+                    <ul style="padding-left:18px; margin-bottom:14px; font-size:12px; color:#4B5563;">
+                        <li><strong>Roupas claras:</strong> Facilitam a visualização imediata do carrapato subindo pelo corpo.</li>
+                        <li><strong>Calças por dentro das meias:</strong> Coloque a barra da calça por dentro de meias de cano longo e use fita adesiva para fechar a abertura.</li>
+                        <li><strong>Repelentes eficazes:</strong> Utilize repelentes à base de Icaridina ou DEET na pele e Permetrina nas roupas e calçados.</li>
+                        <li><strong>Autoexame regular:</strong> A cada 2 horas e ao chegar em casa, examine todo o corpo, especialmente axilas, virilhas, couro cabeludo e atrás dos joelhos.</li>
+                    </ul>
+                    <h4 style="color:var(--primary-purple); font-size:14px; margin-bottom:6px;">Em Animais Domésticos:</h4>
+                    <ul style="padding-left:18px; margin-bottom:16px; font-size:12px; color:#4B5563;">
+                        <li>Mantenha coleiras antiparasitárias ou comprimidos mastigáveis em dia.</li>
+                        <li>Inspecione as orelhas, patas e entre os dedos dos pets após passeios.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL: MEDIDAS DE CONTROLE ALTERNATIVO -->
+        <div id="modalControle" class="modal-overlay">
+            <div class="modal-sheet">
+                <div class="modal-drag-bar"></div>
+                <div class="modal-header">
+                    <h3 class="modal-title">Controle Alternativo e Agroecológico</h3>
+                    <button class="modal-close-btn">&times;</button>
+                </div>
+                <div style="font-size:13px; line-height:1.6; color:#374151;">
+                    <div style="margin-bottom:12px;">
+                        <h4 style="color:var(--card-green); font-size:14px; margin-bottom:4px;">1. Manejo Integrado de Pastagens</h4>
+                        <p style="font-size:12px; color:#4B5563;">A rotação de piquetes com descanso prolongado expõe as larvas ao sol e dessecação, quebrando o ciclo reprodutivo do carrapato.</p>
+                    </div>
+                    <div style="margin-bottom:12px;">
+                        <h4 style="color:var(--card-green); font-size:14px; margin-bottom:4px;">2. Controle Biológico com Fungos Entomopatogênicos</h4>
+                        <p style="font-size:12px; color:#4B5563;">Uso de bioacaricidas à base de <em>Metarhizium anisopliae</em> e <em>Beauveria bassiana</em>, fungos naturais que penetram na cutícula do carrapato sem intoxicar animais ou poluir o solo.</p>
+                    </div>
+                    <div style="margin-bottom:12px;">
+                        <h4 style="color:var(--card-green); font-size:14px; margin-bottom:4px;">3. Fitoterapia e Extrato de Neem</h4>
+                        <p style="font-size:12px; color:#4B5563;">O óleo de sementes de neem (<em>Azadirachta indica</em>) possui efeito repelente e inibidor de ovoposição de fêmeas ingurgitadas.</p>
+                    </div>
+                    <div style="margin-bottom:16px;">
+                        <h4 style="color:var(--card-green); font-size:14px; margin-bottom:4px;">4. Aves Predadoras Naturais</h4>
+                        <p style="font-size:12px; color:#4B5563;">Galinhas-d'angola (<em>Numida meleagris</em>) e emas consomem ativamente centenas de carrapatos por dia em piquetes e margens de matas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL: CHAVE DICOTÔMICA (PERGUNTAS MORFOLÓGICAS) -->
+        <div id="modalChave" class="modal-overlay">
+            <div class="modal-sheet">
+                <div class="modal-drag-bar"></div>
+                <div class="modal-header">
+                    <h3 class="modal-title">Chave de Identificação Guiada</h3>
+                    <button class="modal-close-btn">&times;</button>
+                </div>
+                <div id="keyWizardContainer">
+                    <div class="key-step-box">
+                        <div style="font-size:11px; font-weight:700; color:#6B7280; text-transform:uppercase; margin-bottom:4px;" id="keyStepNumber">Etapa 1 de 4</div>
+                        <div class="key-step-question" id="keyStepQuestion">O carrapato possui escudo dorsal duro e visível?</div>
+                        <div class="key-options-list" id="keyOptionsList">
+                            <!-- Inserido dinamicamente via JS -->
+                        </div>
+                    </div>
+                    <button id="btnResetKeyWizard" style="background:none; border:none; color:var(--text-muted); font-size:12px; cursor:pointer; text-decoration:underline;">Reiniciar chave</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL: NOTIFICAR NOVA OCORRÊNCIA NO MAPA -->
+        <div id="modalNewReport" class="modal-overlay">
+            <div class="modal-sheet">
+                <div class="modal-drag-bar"></div>
+                <div class="modal-header">
+                    <h3 class="modal-title">Notificar Presença de Carrapato</h3>
+                    <button class="modal-close-btn">&times;</button>
+                </div>
+                <form id="formNewReport">
+                    <div class="form-group">
+                        <label class="form-label" for="reportSpeciesSelect">Espécie Encontrada / Suspeita:</label>
+                        <select id="reportSpeciesSelect" class="form-select" required>
+                            <option value="">Selecione a espécie...</option>
+                            <option value="amblyomma_sculptum">Amblyomma sculptum (Carrapato-estrela)</option>
+                            <option value="rhipicephalus_sanguineus">Rhipicephalus sanguineus (Carrapato-de-cão)</option>
+                            <option value="amblyomma_aureolatum">Amblyomma aureolatum (Carrapato-amarelo)</option>
+                            <option value="dermacentor_nitens">Dermacentor nitens (Orelha-do-cavalo)</option>
+                            <option value="rhipicephalus_microplus">Rhipicephalus microplus (Carrapato-do-boi)</option>
+                            <option value="argas_miniatus">Argas miniatus (Carrapato-de-galinha)</option>
+                            <option value="amblyomma_ovale">Amblyomma ovale (Carrapato-ovale)</option>
+                            <option value="other">Outra / Não sei identificar</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="reportHostSelect">Hospedeiro / Local do achado:</label>
+                        <select id="reportHostSelect" class="form-select" required>
+                            <option value="Humano">Ser Humano (Picada / Corpo)</option>
+                            <option value="Cão doméstico">Cão doméstico</option>
+                            <option value="Equino">Equino / Cavalo</option>
+                            <option value="Bovino">Bovino / Gado</option>
+                            <option value="Capivara">Capivara / Margem de lago</option>
+                            <option value="Vegetação">Vegetação / Trilha / Grama</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="reportLocationInput">Localização (Cidade, Bairro ou Parque):</label>
+                        <input type="text" id="reportLocationInput" class="form-input" placeholder="Ex: Parque Taquaral, Campinas - SP" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="reportNotesInput">Observações adicionais:</label>
+                        <textarea id="reportNotesInput" class="form-textarea" placeholder="Detalhes morfológicos, número de espécimes, se houve sintomas..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary-block" style="background:var(--pin-orange);">Publicar Notificação no Mapa</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- MODAL: DETALHES COMPLETOS DA ESPÉCIE (DOSSIER CIENTÍFICO) -->
+        <div id="modalSpeciesDetail" class="modal-overlay">
+            <div class="modal-sheet">
+                <div class="modal-drag-bar"></div>
+                <div class="modal-header">
+                    <h3 class="modal-title" id="speciesDetailTitle">Detalhes da Espécie</h3>
+                    <button class="modal-close-btn">&times;</button>
+                </div>
+                <div id="speciesDetailBody">
+                    <!-- Inserido dinamicamente via JS -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts da Aplicação -->
+    <script src="js/database.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
